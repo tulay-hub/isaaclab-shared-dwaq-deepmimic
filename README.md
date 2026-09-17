@@ -1,3 +1,6 @@
+<p align="center"><a href="#zh">🇨🇳 中文</a> &nbsp;|&nbsp; <a href="#en">🇬🇧 English</a></p>
+<a id="zh"></a>
+
 # Lens110 RL 项目（2026-08-28 整理版）
 
 本目录是 Lens110 21-DOF 的唯一训练/仿真工程。旧 rl_games 框架已迁移归档，
@@ -61,6 +64,8 @@ python scripts/rsl_rl/play.py --task Tracking-Flat-Lens110-v0 \
 - 旧训练日志: `logs/archive/rl_games`
 - 旧 MuJoCo 播放器: `lens110_rl/mujoco/legacy_old_interface`（13 维残差旧接口, 新接口适配中）
 - 上游/副本: `_archive_20260828/` 下 `source_whole_body_tracking_old` 与两份 example 副本
+
+<a id="en"></a>
 
 ## English
 
