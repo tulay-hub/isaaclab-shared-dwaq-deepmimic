@@ -1,4 +1,4 @@
-# Humanoid Motion Learning and Deployment Workspace
+# 双足人形机器人训练与部署共享框架
 
 <p align='center'>
   <a href='#zh'>中文</a>
@@ -30,15 +30,15 @@
 
 ## 通用平衡演示
 
-完整共享训练架构见 [`docs/TRAINING_ARCHITECTURE.md`](docs/TRAINING_ARCHITECTURE.md)。以下视频是通用平衡/部署演示，不代表某一个训练任务的 actor 观测契约。
+本 README 已直接包含共享训练架构、六个训练项目的算法和接口说明。以下 GIF 是通用平衡/部署演示，不代表某一个训练任务的 actor 观测契约；完整视频文件也保留在 `docs/media/`。
 
-<video controls width="720" src="docs/media/self-balance-demo.webm"></video>
+![自平衡演示](docs/media/self-balance-demo.gif)
 
-[打开或下载自平衡演示](docs/media/self-balance-demo.webm)
+[打开或下载原始自平衡视频](docs/media/self-balance-demo.webm)
 
-<video controls width="720" src="docs/media/heavy-load-self-balance-demo.mp4"></video>
+![重载自平衡演示](docs/media/heavy-load-self-balance-demo.gif)
 
-[打开或下载重载自平衡演示](docs/media/heavy-load-self-balance-demo.mp4)
+[打开或下载原始重载自平衡视频](docs/media/heavy-load-self-balance-demo.mp4)
 
 ## 总体实现架构
 
