@@ -1,0 +1,76 @@
+gmr_dof_names:
+  - left_thigh_yaw_joint
+  - left_thigh_roll_joint
+  - left_thigh_pitch_joint
+  - left_knee_joint
+  - left_ankle_pitch_joint
+  - left_ankle_roll_joint
+  - right_thigh_yaw_joint
+  - right_thigh_roll_joint
+  - right_thigh_pitch_joint
+  - right_knee_joint
+  - right_ankle_pitch_joint
+  - right_ankle_roll_joint
+  - torso_joint
+  - left_arm_pitch_joint
+  - left_arm_roll_joint
+  - left_arm_yaw_joint
+  - left_elbow_pitch_joint
+  - left_elbow_yaw_joint
+  - right_arm_pitch_joint
+  - right_arm_roll_joint
+  - right_arm_yaw_joint
+  - right_elbow_pitch_joint
+  - right_elbow_yaw_joint
+
+lab_dof_names:
+  - left_thigh_pitch_joint
+  - left_thigh_roll_joint
+  - left_thigh_yaw_joint
+  - left_knee_joint
+  - left_ankle_pitch_joint
+  - left_ankle_roll_joint
+  - right_thigh_pitch_joint
+  - right_thigh_roll_joint
+  - right_thigh_yaw_joint
+  - right_knee_joint
+  - right_ankle_pitch_joint
+  - right_ankle_roll_joint
+  - torso_joint
+  - left_arm_pitch_joint
+  - left_arm_roll_joint
+  - left_arm_yaw_joint
+  - left_elbow_pitch_joint
+  - right_arm_pitch_joint
+  - right_arm_roll_joint
+  - right_arm_yaw_joint
+  - right_elbow_pitch_joint
+
+lab_joint_names:
+  - left_hip_pitch_joint
+  - left_hip_roll_joint
+  - left_hip_yaw_joint
+  - left_knee_joint
+  - left_ankle_pitch_joint
+  - left_ankle_roll_joint
+  - right_hip_pitch_joint
+  - right_hip_roll_joint
+  - right_hip_yaw_joint
+  - right_knee_joint
+  - right_ankle_pitch_joint
+  - right_ankle_roll_joint
+  - torso_yaw_joint
+  - left_shoulder_pitch_joint
+  - left_shoulder_roll_joint
+  - left_shoulder_yaw_joint
+  - left_elbow_joint
+  - right_shoulder_pitch_joint
+  - right_shoulder_roll_joint
+  - right_shoulder_yaw_joint
+  - right_elbow_joint
+
+lab_key_body_names:
+  - left_elbow_link
+  - right_elbow_link
+  - left_shoulder_yaw_link
+  - right_shoulder_yaw_link

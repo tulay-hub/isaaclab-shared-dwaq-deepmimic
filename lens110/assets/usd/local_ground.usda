@@ -1,0 +1,40 @@
+#usda 1.0
+(
+    defaultPrim = "Ground"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Ground" (
+    prepend apiSchemas = ["PhysicsRigidBodyAPI"]
+)
+{
+    uniform token physics:approximation = "convexHull"
+    bool physics:rigidBodyEnabled = 0
+    float3 xformOp:translate = (0.0, 0.0, 0.0)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def Mesh "CollisionBox" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        float3[] extent = [(-500.0, -500.0, -0.2), (500.0, 500.0, 0.0)]
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [
+            0, 1, 2, 3,
+            4, 5, 6, 7,
+            0, 1, 5, 4,
+            1, 2, 6, 5,
+            2, 3, 7, 6,
+            3, 0, 4, 7
+        ]
+        point3f[] points = [
+            (-500.0, -500.0, -0.2), (500.0, -500.0, -0.2),
+            (500.0, 500.0, -0.2), (-500.0, 500.0, -0.2),
+            (-500.0, -500.0, 0.0), (500.0, -500.0, 0.0),
+            (500.0, 500.0, 0.0), (-500.0, 500.0, 0.0)
+        ]
+        uniform token subdivisionScheme = "none"
+        uniform token physics:approximation = "convexHull"
+    }
+}

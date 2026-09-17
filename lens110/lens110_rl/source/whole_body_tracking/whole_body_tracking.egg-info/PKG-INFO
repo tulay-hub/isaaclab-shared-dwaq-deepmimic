@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: whole_body_tracking
+Version: 0.1.0
+Summary: Whole-body tracking example adapted for T800 and PM01 humanoid platforms.
+Home-page: 
+Author: 
+Maintainer: 
+License: MIT
+Keywords: humanoid,whole-body-tracking,t800,pm01,isaaclab
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Isaac Sim :: 2023.1.1
+Classifier: Isaac Sim :: 4.0.0
+Requires-Python: >=3.10
+Requires-Dist: psutil
+Requires-Dist: onnxscript
+Requires-Dist: wandb>=0.19
+Dynamic: classifier
+Dynamic: keywords
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

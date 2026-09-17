@@ -1,0 +1,23 @@
+[package]
+
+version = "0.1.0"
+
+category = "isaaclab"
+readme  = "README.md"
+
+title = "BeyondMimic T800/PM01 Example"
+author = ""
+maintainer = ""
+description = "Whole-body tracking example adapted for T800 and PM01 humanoid platforms."
+repository = ""
+keywords = ["humanoid", "whole-body-tracking", "t800", "pm01", "isaaclab"]
+
+[dependencies]
+"isaaclab" = {}
+"isaaclab_assets" = {}
+"isaaclab_mimic" = {}
+"isaaclab_rl" = {}
+"isaaclab_tasks" = {}
+
+[[python.module]]
+name = "whole_body_tracking"

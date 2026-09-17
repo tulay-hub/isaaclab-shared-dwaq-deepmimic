@@ -1,0 +1,68 @@
+seed: 42
+device: cuda:0
+num_steps_per_env: 24
+max_iterations: 23800
+empirical_normalization: null
+obs_groups:
+  policy:
+  - policy
+  critic:
+  - critic
+  obs_history:
+  - obs_history
+  velocity:
+  - velocity
+clip_actions: null
+save_interval: 100
+experiment_name: lens110_dwaq
+run_name: from_model_36200_straight_foot_random_5_25
+logger: tensorboard
+neptune_project: isaaclab
+wandb_project: isaaclab
+resume: true
+load_run: 2026-09-15_10-55-44_from_34200
+load_checkpoint: model_36200.pt
+class_name: DWAQRunner
+policy:
+  class_name: ActorCriticDWAQ
+  init_noise_std: 1.0
+  noise_std_type: log
+  state_dependent_std: false
+  actor_obs_normalization: false
+  critic_obs_normalization: false
+  actor_hidden_dims:
+  - 512
+  - 256
+  - 128
+  critic_hidden_dims:
+  - 512
+  - 256
+  - 128
+  activation: elu
+  cenet_out_dim: 19
+  velocity_dim: 3
+  encoder_hidden_dims:
+  - 128
+  encoder_latent_dim: 64
+  decoder_hidden_dims:
+  - 64
+  - 128
+algorithm:
+  class_name: DWAQPPO
+  num_learning_epochs: 5
+  num_mini_batches: 4
+  learning_rate: 0.0001
+  schedule: fixed
+  gamma: 0.99
+  lam: 0.95
+  entropy_coef: 0.008
+  desired_kl: 0.01
+  max_grad_norm: 1.0
+  value_loss_coef: 1.0
+  use_clipped_value_loss: true
+  clip_param: 0.2
+  normalize_advantage_per_mini_batch: false
+  rnd_cfg: null
+  symmetry_cfg: null
+  beta: 1.0
+  vae_learning_rate: 0.0001

@@ -1,0 +1,330 @@
+robot_humanoid_config:
+
+  model_file:
+    walk_model_name: "/config/model/humanoid_lens110_model/L110_policy_0101.onnx"
+    dance_model_name: "/config/model/humanoid_lens110_model/L110_dance_qpg_policy_0303.onnx"
+
+  csv_file:
+    actionA_file_name: "/config/data/humanoid_data/shake.csv"
+    actionB_file_name: "/config/data/humanoid_data/wave_hand.csv"
+    actionX_file_name: "/config/data/humanoid_data/talk.csv"
+    actionDance_file_name: "/config/data/humanoid_data/lens110_dance_data.csv"
+
+  robot_dof:
+    num_all_dof: 21   #注: all_dof = 其他dof之和
+    num_leg_dof: 12
+    num_arm_dof: 9
+
+  joint_names:
+    1:  left_hip_pitch_joint
+    2:  left_hip_roll_joint       
+    3:  left_hip_yaw_joint        
+    4:  left_knee_joint           
+    5:  left_ankle_upper_joint    
+    6:  left_ankle_lower_joint    
+    7:  right_hip_pitch_joint    
+    8:  right_hip_roll_joint      
+    9:  right_hip_yaw_joint       
+    10: right_knee_joint        
+    11: right_ankle_upper_joint
+    12: right_ankle_lower_joint
+    13: left_shoulder_pitch_joint
+    14: left_shoulder_roll_joint
+    15: left_shoulder_yaw_joint
+    16: left_elbow_joint
+    17: right_shoulder_pitch_joint
+    18: right_shoulder_roll_joint
+    19: right_shoulder_yaw_joint
+    20: right_elbow_joint
+    21: torso_yaw_joint
+
+  joint_direction:
+    1:   1
+    2:   1
+    3:  -1
+    4:  -1
+    5:   1
+    6:  -1
+    7:  -1
+    8:   1
+    9:  -1
+    10:  1
+    11: -1
+    12:  1
+    13:  1
+    14:  1
+    15: -1
+    16: -1
+    17: -1
+    18:  1
+    19: -1
+    20:  1
+    21:  1
+
+  init_state:
+    zero_joint_angle0:
+      left_hip_pitch_joint:         0.0
+      left_hip_roll_joint:          0.0
+      left_hip_yaw_joint:           0.0
+      left_knee_joint:              0.0
+      left_ankle_upper_joint:       0.0
+      left_ankle_lower_joint:       0.0
+      right_hip_pitch_joint:        0.0
+      right_hip_roll_joint:         0.0
+      right_hip_yaw_joint:          0.0
+      right_knee_joint:             0.0
+      right_ankle_upper_joint:      0.0
+      right_ankle_lower_joint:      0.0
+      left_shoulder_pitch_joint:    0.0
+      left_shoulder_roll_joint:     0.2
+      left_shoulder_yaw_joint:      0.0
+      left_elbow_joint:             0.0
+      right_shoulder_pitch_joint:   0.0
+      right_shoulder_roll_joint:    -0.2
+      right_shoulder_yaw_joint:     0.0
+      right_elbow_joint:            0.0
+      torso_yaw_joint:              0.0
+
+    stand_joint_angle:
+      left_hip_pitch_joint:         -0.14
+      left_hip_roll_joint:          -0.01
+      left_hip_yaw_joint:           -0.1
+      left_knee_joint:              0.36
+      left_ankle_upper_joint:       0.26
+      left_ankle_lower_joint:       0.26
+      right_hip_pitch_joint:        -0.14
+      right_hip_roll_joint:         0.01
+      right_hip_yaw_joint:          0.1
+      right_knee_joint:             0.36
+      right_ankle_upper_joint:      0.26
+      right_ankle_lower_joint:      0.26
+      left_shoulder_pitch_joint:    0.4
+      left_shoulder_roll_joint:     0.2
+      left_shoulder_yaw_joint:      0.0
+      left_elbow_joint:             -0.8
+      right_shoulder_pitch_joint:   0.4
+      right_shoulder_roll_joint:    -0.2
+      right_shoulder_yaw_joint:     0.0
+      right_elbow_joint:            0.8
+      torso_yaw_joint:              0.0
+
+    default_joint_angle:
+      left_hip_pitch_joint:         -0.14
+      left_hip_roll_joint:          -0.01
+      left_hip_yaw_joint:           -0.1
+      left_knee_joint:              0.36
+      left_ankle_upper_joint:       0.29
+      left_ankle_lower_joint:       0.29
+      right_hip_pitch_joint:        -0.14
+      right_hip_roll_joint:         0.01
+      right_hip_yaw_joint:          0.1
+      right_knee_joint:             0.36
+      right_ankle_upper_joint:      0.29
+      right_ankle_lower_joint:      0.29
+
+    default_joint_angle_dance:
+      left_hip_pitch_joint:         -0.14
+      left_hip_roll_joint:          -0.01
+      left_hip_yaw_joint:           -0.1
+      left_knee_joint:              0.36
+      left_ankle_upper_joint:       0.34
+      left_ankle_lower_joint:       0.34
+      right_hip_pitch_joint:        -0.14
+      right_hip_roll_joint:         0.01
+      right_hip_yaw_joint:          0.1
+      right_knee_joint:             0.36
+      right_ankle_upper_joint:      0.34
+      right_ankle_lower_joint:      0.34
+
+  control:
+    stand:
+      stiffness:
+        left_hip_pitch_joint:       400.0
+        left_hip_roll_joint:        500.0
+        left_hip_yaw_joint:         300.0
+        left_knee_joint:            400.0
+        left_ankle_upper_joint:     100.0
+        left_ankle_lower_joint:     100.0
+        right_hip_pitch_joint:      400.0
+        right_hip_roll_joint:       500.0
+        right_hip_yaw_joint:        300.0
+        right_knee_joint:           400.0
+        right_ankle_upper_joint:    100.0
+        right_ankle_lower_joint:    100.0
+        left_shoulder_pitch_joint:  100.0
+        left_shoulder_roll_joint:   100.0
+        left_shoulder_yaw_joint:    100.0
+        left_elbow_joint:           100.0
+        right_shoulder_pitch_joint: 100.0
+        right_shoulder_roll_joint:  100.0
+        right_shoulder_yaw_joint:   100.0
+        right_elbow_joint:          100.0
+        torso_yaw_joint:            100.0
+      damping:
+        left_hip_pitch_joint:       5.0
+        left_hip_roll_joint:        5.0
+        left_hip_yaw_joint:         5.0
+        left_knee_joint:            5.0
+        left_ankle_upper_joint:     5.0
+        left_ankle_lower_joint:     5.0
+        right_hip_pitch_joint:      5.0
+        right_hip_roll_joint:       5.0
+        right_hip_yaw_joint:        5.0
+        right_knee_joint:           5.0
+        right_ankle_upper_joint:    5.0
+        right_ankle_lower_joint:    5.0
+        left_shoulder_pitch_joint:  2.0
+        left_shoulder_roll_joint:   2.0
+        left_shoulder_yaw_joint:    2.0
+        left_elbow_joint:           2.0
+        right_shoulder_pitch_joint: 2.0
+        right_shoulder_roll_joint:  2.0
+        right_shoulder_yaw_joint:   2.0
+        right_elbow_joint:          2.0
+        torso_yaw_joint:            5.0
+   
+    walk:
+      stiffness:
+        left_hip_pitch_joint:       40.0
+        left_hip_roll_joint:        40.0
+        left_hip_yaw_joint:         40.0
+        left_knee_joint:            40.0
+        left_ankle_upper_joint:     30.0
+        left_ankle_lower_joint:     30.0
+        right_hip_pitch_joint:      40.0
+        right_hip_roll_joint:       40.0
+        right_hip_yaw_joint:        40.0
+        right_knee_joint:           40.0
+        right_ankle_upper_joint:    30.0
+        right_ankle_lower_joint:    30.0
+        left_shoulder_pitch_joint:  20.0
+        left_shoulder_roll_joint:   20.0
+        left_shoulder_yaw_joint:    20.0
+        left_elbow_joint:           20.0
+        right_shoulder_pitch_joint: 20.0
+        right_shoulder_roll_joint:  20.0
+        right_shoulder_yaw_joint:   20.0
+        right_elbow_joint:          20.0
+        torso_yaw_joint:            100.0
+      damping:
+        left_hip_pitch_joint:       5.0
+        left_hip_roll_joint:        5.0
+        left_hip_yaw_joint:         5.0
+        left_knee_joint:            5.0
+        left_ankle_upper_joint:     5.0
+        left_ankle_lower_joint:     5.0
+        right_hip_pitch_joint:      5.0
+        right_hip_roll_joint:       5.0
+        right_hip_yaw_joint:        5.0
+        right_knee_joint:           5.0
+        right_ankle_upper_joint:    5.0
+        right_ankle_lower_joint:    5.0
+        left_shoulder_pitch_joint:  1.0
+        left_shoulder_roll_joint:   1.0
+        left_shoulder_yaw_joint:    1.0
+        left_elbow_joint:           1.0
+        right_shoulder_pitch_joint: 1.0
+        right_shoulder_roll_joint:  1.0
+        right_shoulder_yaw_joint:   1.0
+        right_elbow_joint:          1.0
+        torso_yaw_joint:            5.0
+    
+    dance:
+      stiffness:
+        left_hip_pitch_joint:       40.0
+        left_hip_roll_joint:        40.0
+        left_hip_yaw_joint:         40.0
+        left_knee_joint:            40.0
+        left_ankle_upper_joint:     10.0
+        left_ankle_lower_joint:     10.0
+        right_hip_pitch_joint:      40.0
+        right_hip_roll_joint:       40.0
+        right_hip_yaw_joint:        40.0
+        right_knee_joint:           40.0
+        right_ankle_upper_joint:    10.0
+        right_ankle_lower_joint:    10.0
+        left_shoulder_pitch_joint:  100.0
+        left_shoulder_roll_joint:   100.0
+        left_shoulder_yaw_joint:    100.0
+        left_elbow_joint:           100.0
+        right_shoulder_pitch_joint: 100.0
+        right_shoulder_roll_joint:  100.0
+        right_shoulder_yaw_joint:   100.0
+        right_elbow_joint:          100.0
+        torso_yaw_joint:            100.0
+      damping:
+        left_hip_pitch_joint:       5.0
+        left_hip_roll_joint:        5.0
+        left_hip_yaw_joint:         5.0
+        left_knee_joint:            5.0
+        left_ankle_upper_joint:     5.0
+        left_ankle_lower_joint:     5.0
+        right_hip_pitch_joint:      5.0
+        right_hip_roll_joint:       5.0
+        right_hip_yaw_joint:        5.0
+        right_knee_joint:           5.0
+        right_ankle_upper_joint:    5.0
+        right_ankle_lower_joint:    5.0
+        left_shoulder_pitch_joint:  5.0
+        left_shoulder_roll_joint:   5.0
+        left_shoulder_yaw_joint:    5.0
+        left_elbow_joint:           5.0
+        right_shoulder_pitch_joint: 5.0
+        right_shoulder_roll_joint:  5.0
+        right_shoulder_yaw_joint:   5.0
+        right_elbow_joint:          5.0
+        torso_yaw_joint:            5.0
+   
+
+    action_scale: 0.25 #0.25
+    decimation: 10 #  rl:100Hz ; control:1000Hz
+    cycle_time: 1.28
+    dt: 0.001 # 1000Hz
+
+  normalization:
+    clip_scales:
+      clip_observations: 50.0
+      clip_actions: 50.0
+    obs_scales:
+      lin_vel: 2.0
+      ang_vel: 1.0
+      dof_pos: 1.0
+      dof_vel: 0.05
+      quat: 1.0
+      height_measurements: 5.0
+    cmd_vel_bias:
+      cmd_vel_bias_x: 0.01
+      cmd_vel_bias_y: 0.0
+      cmd_vel_bias_yaw: -0.0
+    imu_angle_bias:
+      euler_x_bias: 0.0
+      euler_y_bias: -0.01
+      euler_z_bias: 0.0
+
+  size:
+    walk:
+      actions_size: 12
+      observations_size: 48
+      history_size: 15
+      input_size: 720
+      command_size: 6
+    dance:
+      actions_size: 21
+      observations_size: 45
+      history_size: 15
+      input_size: 675
+      command_size: 6
+
+  joystick_speed_limit:
+    max_speeds:
+      vx:   0.8
+      vy:   0.5
+      vz:   0.0
+      vw:   0.4
+
+    min_speeds:
+      vx:  -0.3
+      vy:  -0.5
+      vz:   0.0
+      vw:  -0.4
+
