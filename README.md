@@ -1,16 +1,16 @@
 # Humanoid Motion Learning and Deployment Workspace
 
 <p align='center'>
-  <a href='#zh'>🇨🇳 中文</a>
+  <a href='#zh'>中文</a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href='#en'>🇬🇧 English</a>
+  <a href='#en'>English</a>
 </p>
 
 <a id='zh'></a>
 
 ## 中文
 
-这是一个面向人形机器人动作重定向、模仿学习、盲行走、楼梯行走、跌倒起身、侧滚、MuJoCo sim2sim 和 ROS2 真机部署的完整工作区。每个任务项目都有独立的代码、数据、导出包和说明，共享框架与数据通过固定 commit 的子模块连接。
+这是一个面向双足人形机器人动作重定向、模仿学习、盲行走、楼梯行走、跌倒起身、侧滚、MuJoCo sim2sim 和 ROS2 真机部署的完整工作区。每个任务项目都有独立的代码、数据、导出包和说明，共享框架与数据通过固定 commit 的子模块连接。
 
 ## 项目导航
 
@@ -27,6 +27,18 @@
 | Robot 重定向 | [robot-retargeter-smplx](https://github.com/tulay-hub/robot-retargeter-smplx) | SMPL-X + URDF/MJCF | body -> robot |
 | 舞蹈数据 | [dance-dataset](https://github.com/tulay-hub/dance-dataset) | BVH dataset | raw motion |
 | G1 数据说明 | [g1-motion-dataset](https://github.com/tulay-hub/g1-motion-dataset) | documentation | 当前不发布 G1 CSV |
+
+## 通用平衡演示
+
+完整共享训练架构见 [`docs/TRAINING_ARCHITECTURE.md`](docs/TRAINING_ARCHITECTURE.md)。以下视频是通用平衡/部署演示，不代表某一个训练任务的 actor 观测契约。
+
+<video controls width="720" src="docs/media/self-balance-demo.webm"></video>
+
+[打开或下载自平衡演示](docs/media/self-balance-demo.webm)
+
+<video controls width="720" src="docs/media/heavy-load-self-balance-demo.mp4"></video>
+
+[打开或下载重载自平衡演示](docs/media/heavy-load-self-balance-demo.mp4)
 
 ## 总体实现架构
 
@@ -228,7 +240,7 @@ bash deployment/infer_zero/infer_zero/scripts/infer_zero.sh
 
 ## English
 
-This workspace provides an end-to-end organization for humanoid motion retargeting, imitation learning, blind locomotion, stair locomotion, fall recovery, side rolling, MuJoCo sim2sim, and ROS2 real-robot deployment. Each task repository owns its code, data, exports, scripts, and bilingual documentation. Shared dependencies are pinned with submodules.
+This workspace provides an end-to-end organization for bipedal humanoid robot motion retargeting, imitation learning, blind locomotion, stair locomotion, fall recovery, side rolling, MuJoCo sim2sim, and ROS2 real-robot deployment. Each task repository owns its code, data, exports, scripts, and bilingual documentation. Shared dependencies are pinned with submodules.
 
 ## Project map
 

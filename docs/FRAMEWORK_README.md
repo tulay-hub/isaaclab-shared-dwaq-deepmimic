@@ -1,9 +1,9 @@
-<p align="center"><a href="#zh">🇨🇳 中文</a> &nbsp;|&nbsp; <a href="#en">🇬🇧 English</a></p>
+<p align="center"><a href="#zh">中文</a> &nbsp;|&nbsp; <a href="#en">English</a></p>
 <a id="zh"></a>
 
-# Lens110 RL 项目（2026-08-28 整理版）
+# 双足人形机器人 RL 项目（2026-08-28 整理版）
 
-本目录是 Lens110 21-DOF 的唯一训练/仿真工程。旧 rl_games 框架已迁移归档，
+本目录是双足人形机器人 21-DOF 的唯一训练/仿真工程。旧 rl_games 框架已迁移归档，
 当前主线为 `lens110_rl`（whole_body_tracking_engineai / rsl_rl 框架）。
 
 ## 目录结构
