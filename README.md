@@ -8,14 +8,6 @@
 
 <a id='zh'></a>
 
-## 训练权重如何理解 / Interpreting training weights
-
-本文按本仓库当前代码说明训练机制；已有策略的复现参数以对应 run 的 `params/env.yaml`、`params/agent.yaml` 和部署配置为准。奖励混合系数、逐项环境奖励权重、优化器 loss 系数、专家样本比例以及课程采样范围是不同概念。
-
-混合系数可以写成 85%/15% 这样的配置比例，但不能代表训练过程中实际累计奖励贡献；单项 reward 的数值范围、门控、控制步长和出现频率都不同。需要实际贡献占比时，应统计同一 run 中每项加权回报，而不是把配置权重归一化成百分比。
-
-Configuration mixing coefficients are not measured reward contributions. Environment weights, optimizer coefficients, expert sampling and curriculum schedules describe different parts of training. Reproduce a saved policy with its own run snapshots.
-
 ## 实际训练机制与权重 / Implemented training mechanisms
 
 | 项目 | 实际方法 | 配比与阶段 |
@@ -203,6 +195,14 @@ r_track = exp(-||error||^2 / std^2)
 | Stairs | 复用 DWAQ reward，增加 terrain row 0、约 5..30cm 楼梯路径、连续成功升阶和失败降阶 |
 
 完整奖励项、权重、代码路径见 [docs/REWARD_FRAMEWORKS.md](docs/REWARD_FRAMEWORKS.md)。
+
+## 训练权重如何理解 / Interpreting training weights
+
+本文按本仓库当前代码说明训练机制；已有策略的复现参数以对应 run 的 `params/env.yaml`、`params/agent.yaml` 和部署配置为准。奖励混合系数、逐项环境奖励权重、优化器 loss 系数、专家样本比例以及课程采样范围是不同概念。
+
+混合系数可以写成 85%/15% 这样的配置比例，但不能代表训练过程中实际累计奖励贡献；单项 reward 的数值范围、门控、控制步长和出现频率都不同。需要实际贡献占比时，应统计同一 run 中每项加权回报，而不是把配置权重归一化成百分比。
+
+Configuration mixing coefficients are not measured reward contributions. Environment weights, optimizer coefficients, expert sampling and curriculum schedules describe different parts of training. Reproduce a saved policy with its own run snapshots.
 
 ## 导出、MuJoCo 和真机部署
 
