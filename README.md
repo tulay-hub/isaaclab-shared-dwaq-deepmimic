@@ -8,6 +8,29 @@
 
 <a id='zh'></a>
 
+## 训练权重如何理解 / Interpreting training weights
+
+本文按本仓库当前代码说明训练机制；已有策略的复现参数以对应 run 的 `params/env.yaml`、`params/agent.yaml` 和部署配置为准。奖励混合系数、逐项环境奖励权重、优化器 loss 系数、专家样本比例以及课程采样范围是不同概念。
+
+混合系数可以写成 85%/15% 这样的配置比例，但不能代表训练过程中实际累计奖励贡献；单项 reward 的数值范围、门控、控制步长和出现频率都不同。需要实际贡献占比时，应统计同一 run 中每项加权回报，而不是把配置权重归一化成百分比。
+
+Configuration mixing coefficients are not measured reward contributions. Environment weights, optimizer coefficients, expert sampling and curriculum schedules describe different parts of training. Reproduce a saved policy with its own run snapshots.
+
+## 实际训练机制与权重 / Implemented training mechanisms
+
+| 项目 | 实际方法 | 配比与阶段 |
+|---|---|---|
+| 全身舞蹈 | DeepMimic 参考动作指导 + RSI + PPO 残差控制 | 七项跟踪权重合计 1.75；PPO value/entropy=1/0.005；当前无硬 action clip |
+| 半身 upper/lower | 专家动作 AMP（LSGAN）+ PPOAMP + 踝部映射 | task/style=0.4/0.6；style=0.02×5×phi；200/50 Hz；判别器 3 帧 |
+| 行走 | DWAQ PPO + 历史 Context β-VAE | RL value/entropy=1/0.008；VAE velocity/reconstruction/KL 系数=1/1/1 |
+| 跌倒起身 | AMP + 专家动作指导 + 倒放式课程（PPO） | task/AMP=0.85/0.15；AMP=0.1×phi；当前出生高度下界 0.16→0.16 m |
+| 侧滚 | 159-D DeepMimic + RSI + PPO 参考中心残差 | 与全身同残差公式；alive=0.05、静止段=-2；合法滚地终止门 |
+| 盲走上楼梯 | DWAQ PPO + β-VAE + 成功门控地形课程 | 复用行走权重；连续两次达到时间/净位移条件才升阶 |
+
+起身的专家指导包含专家状态转移对判别器的指导，以及专家帧初始化；倒放式课程是由容易的起身末段向更低的出生姿态扩展，并非倒序播放动作。当前源码和 v2/model_72500 的快照都为 `z_from=z_to=0.16`，采用课程完全放开的采样范围。恢复环境比例为 1.0，窗口为 300 策略步；这些不是奖励百分比。
+
+English: GetUp combines AMP, expert-transition/state guidance and backward-chaining reset curriculum under PPO. Its reward blend is 0.85 task + 0.15 AMP, with AMP scaled by 0.1. Current source and the v2 checkpoint use start=end=0.16 m, meaning a fully expanded reset range. Upper/lower AMP instead uses 0.4 task + 0.6 style with style=0.02×5×phi and 200/50 Hz simulation/control. DWAQ optimizes PPO and VAE separately; its VAE coefficients are 1:1:1, not percentage contributions.
+
 ## 中文
 
 这是一个面向双足人形机器人动作重定向、模仿学习、盲行走、楼梯行走、跌倒起身、侧滚、MuJoCo sim2sim 和 ROS2 真机部署的完整工作区。每个任务项目都有独立的代码、数据、导出包和说明，共享框架与数据通过固定 commit 的子模块连接。
@@ -126,7 +149,7 @@ GMR 和 deployment CSV 的根四元数为 <code>xyzw</code>；MuJoCo 根 <code>q
 | DeepMimic | 参考动作跟踪、动作平滑 | PPO + reference tracking |
 | AMP | 动作先验、任务目标 | PPO + discriminator/LSGAN |
 | DWAQ | 无视觉本体感觉盲行 | PPO + beta-VAE context + velocity supervision |
-| AMP GetUp | 倒地恢复到稳定站立 | AMP actor/critic + discriminator |
+| AMP GetUp | 倒地恢复到稳定站立 | AMP + 专家动作指导 + 倒放式课程 + PPO |
 
 ~~~bash
 ./projects/01_dance_whole_body/scripts/train.sh --headless --num_envs 1024

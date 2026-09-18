@@ -3,6 +3,29 @@
 
 # 双足人形机器人训练与部署共享框架
 
+## 训练权重如何理解 / Interpreting training weights
+
+本文按本仓库当前代码说明训练机制；已有策略的复现参数以对应 run 的 `params/env.yaml`、`params/agent.yaml` 和部署配置为准。奖励混合系数、逐项环境奖励权重、优化器 loss 系数、专家样本比例以及课程采样范围是不同概念。
+
+混合系数可以写成 85%/15% 这样的配置比例，但不能代表训练过程中实际累计奖励贡献；单项 reward 的数值范围、门控、控制步长和出现频率都不同。需要实际贡献占比时，应统计同一 run 中每项加权回报，而不是把配置权重归一化成百分比。
+
+Configuration mixing coefficients are not measured reward contributions. Environment weights, optimizer coefficients, expert sampling and curriculum schedules describe different parts of training. Reproduce a saved policy with its own run snapshots.
+
+## 实际训练机制与权重 / Implemented training mechanisms
+
+| 项目 | 实际方法 | 配比与阶段 |
+|---|---|---|
+| 全身舞蹈 | DeepMimic 参考动作指导 + RSI + PPO 残差控制 | 七项跟踪权重合计 1.75；PPO value/entropy=1/0.005；当前无硬 action clip |
+| 半身 upper/lower | 专家动作 AMP（LSGAN）+ PPOAMP + 踝部映射 | task/style=0.4/0.6；style=0.02×5×phi；200/50 Hz；判别器 3 帧 |
+| 行走 | DWAQ PPO + 历史 Context β-VAE | RL value/entropy=1/0.008；VAE velocity/reconstruction/KL 系数=1/1/1 |
+| 跌倒起身 | AMP + 专家动作指导 + 倒放式课程（PPO） | task/AMP=0.85/0.15；AMP=0.1×phi；当前出生高度下界 0.16→0.16 m |
+| 侧滚 | 159-D DeepMimic + RSI + PPO 参考中心残差 | 与全身同残差公式；alive=0.05、静止段=-2；合法滚地终止门 |
+| 盲走上楼梯 | DWAQ PPO + β-VAE + 成功门控地形课程 | 复用行走权重；连续两次达到时间/净位移条件才升阶 |
+
+起身的专家指导包含专家状态转移对判别器的指导，以及专家帧初始化；倒放式课程是由容易的起身末段向更低的出生姿态扩展，并非倒序播放动作。当前源码和 v2/model_72500 的快照都为 `z_from=z_to=0.16`，采用课程完全放开的采样范围。恢复环境比例为 1.0，窗口为 300 策略步；这些不是奖励百分比。
+
+English: GetUp combines AMP, expert-transition/state guidance and backward-chaining reset curriculum under PPO. Its reward blend is 0.85 task + 0.15 AMP, with AMP scaled by 0.1. Current source and the v2 checkpoint use start=end=0.16 m, meaning a fully expanded reset range. Upper/lower AMP instead uses 0.4 task + 0.6 style with style=0.02×5×phi and 200/50 Hz simulation/control. DWAQ optimizes PPO and VAE separately; its VAE coefficients are 1:1:1, not percentage contributions.
+
 ## 1. 文档范围
 
 本仓库是六个双足人形机器人训练项目共用的 Isaac Lab/LeggedLab、RSL-RL、机器人资产、MuJoCo 回放和导出底座。它不把不同任务合并成一个 checkpoint；每个任务仍有独立的 observation/action contract、motion set、reward、experiment 和 export package。
@@ -12,7 +35,7 @@
 | 全身舞蹈 | DeepMimic + PPO | `161 -> 21` |
 | 半身舞蹈 | AMP + PPO + LSGAN + upper/lower IO | `72 -> 21` |
 | 行走 | DWAQ + PPO + β-VAE | `76 + 380 -> 21` |
-| 跌倒起身 | AMP GetUp + PPO | `288 -> 21` |
+| 跌倒起身 | AMP + 专家指导 + 倒放式课程 + PPO | `288 -> 21` |
 | 翻滚 | DeepMimic + PPO | `159 -> 21` |
 | 上台阶 | DWAQ + PPO + β-VAE + stair curriculum | `76 + 380 -> 21` |
 
